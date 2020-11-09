@@ -10,9 +10,7 @@ public class Bil implements Movable {
     double x;
     double y;
 
-    public Bil(double x, double y,int nrDoors,double enginePower,Color color, String modelName,double currentSpeed){
-        this.x=x;
-        this.y=y;
+    public Bil(int nrDoors,double enginePower,Color color, String modelName,double currentSpeed){
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.currentSpeed=currentSpeed;
