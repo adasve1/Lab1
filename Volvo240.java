@@ -10,41 +10,10 @@ public class Volvo240 extends Bil{
     String modelName;                                       // The car model name
 
     public Volvo240(){//Synlighet på metoder o konstruktorer?
-        super(4,100,Color.black,"Volvo240",0);
-        //nrDoors = 4;
-        //color = Color.black;
-        //enginePower = 100;
-        //modelName = "Volvo240";
-        //stopEngine();
+        super(0,0,4,100,Color.black,"Volvo240",0);
     }
     
-   /* public int getNrDoors(){
-        return nrDoors;
-    }
-    public double getEnginePower(){
-        return enginePower;
-    }
 
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
-
-    public Color getColor(){
-        return color;
-    }
-
-    public void setColor(Color clr){
-	    color = clr;
-    }
-
-    public void startEngine(){
-	    currentSpeed = 0.1;
-    }
-
-    public void stopEngine(){
-	    currentSpeed = 0;
-    }
-    */
     @Override
     public double speedFactor(){
         return enginePower * 0.01 * trimFactor;
@@ -59,12 +28,12 @@ public class Volvo240 extends Bil{
     }
 
     // TODO fix this method according to lab pm
-    public void gas(double amount){
-        incrementSpeed(amount);
-    }
+    //public void gas(double amount){
+     //   incrementSpeed(amount);
+    //}
 
     // TODO fix this method according to lab pm
-    public void brake(double amount){
-        decrementSpeed(amount);
-    }
+    //public void brake(double amount){
+    //    decrementSpeed(amount);
+    //}
 }

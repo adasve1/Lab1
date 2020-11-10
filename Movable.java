@@ -1,6 +1,5 @@
-interface Movable {
-    default void move(double x){
-    }
+public interface Movable {
+    void move();
     void turnLeft();
     void turnRight();
 }
