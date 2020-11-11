@@ -1,26 +1,43 @@
 import java.awt.*;
 
-public class Saab95 extends Bil{
+/**
+ * An class that extends car and creates a Saab95.
+ */
 
-    private boolean turboOn;
-    int nrDoors;                 // Number of doors on the car
-    double enginePower;          // Engine power of the car
-    double currentSpeed;         // The current speed of the car
-    Color color;                 // Color of the car
-    String modelName;            // The car model name
-    
+public class Saab95 extends Car implements Movable {
+
+    /**
+     * The Saab95 has turbo which is off by default.
+     */
+    static boolean turboOn; //To be able to use in test
+
+    /**
+     * Initializes a Saab95. By default the turbo is off.
+     */
     public Saab95(){
-        super(0,0,2,125,Color.red,"Saab95",0);
+        super(2,125,0,Color.red,"Saab95",0,0);
 	    turboOn = false;
     }
 
-    public void setTurboOn(){
+    /**
+     * Activates the turbo.
+     */
+    public void setTurboOn(){ //visibility
 	    turboOn = true;
     }
 
+    /**
+     * Deactivates the turbo.
+     */
     public void setTurboOff(){
 	    turboOn = false;
     }
+
+    /**
+     * Returns the speed factor which differs depending whether the turbo is on or off.
+     *
+     * @return 1% of the engine power if the turbo is off. 1.3% of the engine power if the turbo is on.
+     */
     @Override
     public double speedFactor(){
         double turbo = 1;
@@ -28,13 +45,4 @@ public class Saab95 extends Bil{
         return enginePower * 0.01 * turbo;
     }
 
-    // TODO fix this method according to lab pm
-    //public void gas(double amount){
-    //    incrementSpeed(amount);
-    //}
-
-    // TODO fix this method according to lab pm
-    //public void brake(double amount){
-    //    decrementSpeed(amount);
-    //}
 }
