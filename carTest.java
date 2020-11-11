@@ -5,14 +5,15 @@ import java.awt.*;
 
 public class carTest {
     private Car car;
+    private Car car2;
     @Before
     public void init(){
-        car = new Car(4,100,100,Color.black,"car",0,0);
+        car = new Car(4,100,0,Color.black,"car",0,0,0);
     }
 
     @Test
     public void TestGetCurrentSpeedCar(){
-        assertEquals(100, car.getCurrentSpeed(), 0.0);
+        assertEquals(0, car.getCurrentSpeed(), 0.0);
     }
 
     @Test
@@ -36,26 +37,56 @@ public class carTest {
         assertEquals(0, car.getYPosition(), 0.0);
     }
 
+
     @Test
     public void TestMoveOK(){
-        double location = car.getXPosition()+car.getCurrentSpeed();
+        car.incrementSpeed(10);
+        car.setDirection(1);
+        double xLocation = car.getXPosition()+car.getXDirection()[car.getDirection()]*car.getCurrentSpeed();
+        double yLocation = car.getYPosition()+car.getYDirection()[car.getDirection()]*car.getCurrentSpeed();
         car.move();
-        assertEquals(location, car.getXPosition(), 0.0);
+        assertEquals(xLocation, car.getXPosition(), 0.0);
+        assertEquals(yLocation, car.getYPosition(),0.0);
     }
 
     @Test
     public void TestTurnLeftOK(){
-        double location = car.getYPosition()+car.getCurrentSpeed();
+        int direction = car.getDirection();
+        int future_dir = (direction-1) % 4;
+        if(future_dir <0){
+            future_dir = 4 + future_dir;
+        }
         car.turnLeft();
-        assertEquals(location, car.getYPosition(), 0.0);
+        assertEquals(future_dir, car.getDirection(), 0.0);
+    }
+
+    @Test
+    public void TestTurnLeftManyTimes(){
+        for(int i= 0; i<400; i++) {
+            car.turnLeft();
+        }
+        assertEquals(0, car.getDirection(), 0.0);
     }
 
     @Test
     public void TestTurnRightOK(){
-        double location = car.getYPosition()-car.getCurrentSpeed();
+        int direction = car.getDirection();
+        int future_dir = (direction+1) % 4;
+        if(future_dir <0){
+            future_dir = 4 + future_dir;
+        }
         car.turnRight();
-        assertEquals(location, car.getYPosition(), 0.0);
+        assertEquals(future_dir, car.getDirection(), 0.0);
     }
+
+    @Test
+    public void TestTurnRightManyTimes(){
+        for(int i= 0; i<101; i++) {
+            car.turnRight();
+        }
+        assertEquals(1, car.getDirection(), 0.0);
+    }
+
 
     @Test
     public void TestGetNrDoorsOK(){
@@ -85,19 +116,60 @@ public class carTest {
         assertEquals(speedFactor, car.speedFactor(), 0.0);
     }
 
-    /*@Test
+    @Test
     public void TestIncrementSpeedOK(){
         double amount = 0.5;
-        double currentSpeed = car.getCurrentSpeed()+ car.speedFactor()*amount;
+        double currentSpeed = Math.min(car.getCurrentSpeed() + car.speedFactor() * amount,car.getEnginePower());
         car.incrementSpeed(amount);
         assertEquals(currentSpeed, car.getCurrentSpeed(), 0.0);
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void TestDecrementSpeedOK(){
         double amount = 25;
-        double currentSpeed = car.getCurrentSpeed()- car.speedFactor()*amount;
+        double currentSpeed = Math.max(car.getCurrentSpeed() - car.speedFactor() * amount,0);
         car.decrementSpeed(amount);
         assertEquals(currentSpeed, car.getCurrentSpeed(), 0.0);
-    }*/
+    }
+
+    @Test
+    public void TestGasTooMuch() throws Exception{
+        car.gas(2);
+        assertEquals(car.getCurrentSpeed(),0,0.0);
+    }
+
+    @Test
+    public void TestGasTooLittle() throws Exception{
+        car.gas(-2);
+        assertEquals(car.getCurrentSpeed(),0,0.0);
+    }
+
+    @Test
+    public void TestGasOK(){
+        car.gas(0.1);
+        car2 = new Car(4,100,0,Color.red,"car2",0,0,0);
+        car2.incrementSpeed(0.1);
+        assertEquals(car.getCurrentSpeed(),car2.getCurrentSpeed(),0.0);
+    }
+
+    @Test
+    public void TestBrakeTooMuch() throws Exception{
+        car.brake(2);
+        assertEquals(car.getCurrentSpeed(),0,0.0);
+    }
+
+    @Test
+    public void TestBrakeTooLittle() throws Exception{
+        car.brake(-2);
+        assertEquals(car.getCurrentSpeed(),0,0.0);
+    }
+
+    @Test
+    public void TestBrakeOK(){
+        car.brake(0.1);
+        car2 = new Car(4,100,0,Color.red,"car2",0,0,0);
+        car2.decrementSpeed(0.1);
+        assertEquals(car.getCurrentSpeed(),car2.getCurrentSpeed(),0.0);
+    }
+    //TODO: brake
 }

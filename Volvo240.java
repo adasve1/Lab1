@@ -8,15 +8,22 @@ public class Volvo240 extends Car{
     /**
      * The volvo240 is trimmed by default.
      */
-    final static double trimFactor = 1.25;
+    private final static double trimFactor = 1.25;
     /**
      * Initializes a Volvo240.
      */
     public Volvo240(){
-        super(4,100,0,Color.black, "Volvo240",0,0);
+        super(4,100,0,Color.black, "Volvo240",0,0,0);
     }
 
-
+    /**
+     * Returns the trim factor.
+     *
+     * @return trim factor.
+     */
+    public double getTrimFactor(){
+        return trimFactor;
+    }
 
     /**
      * Returns the speed factor.
@@ -25,6 +32,6 @@ public class Volvo240 extends Car{
      */
     @Override
     public double speedFactor(){
-        return enginePower * 0.01 * trimFactor;
+        return getEnginePower() * 0.01 * trimFactor;
     }
 }

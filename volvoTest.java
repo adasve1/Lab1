@@ -18,13 +18,13 @@ public class volvoTest {
 
     @Test
     public void TestSpeedFactorOK(){
-        assertEquals(volvo.enginePower*Volvo240.trimFactor*0.01,volvo.speedFactor(),0.0);
+        assertEquals(volvo.getEnginePower()*volvo.getTrimFactor()*0.01,volvo.speedFactor(),0.0);
     }
 
     @Test
     public void TestIncrementSpeedOK(){
         double amount = 10;
-        double currentSpeed = Math.min(volvo.getCurrentSpeed() + volvo.speedFactor() * amount,volvo.enginePower);
+        double currentSpeed = Math.min(volvo.getCurrentSpeed() + volvo.speedFactor() * amount,volvo.getEnginePower());
         volvo.incrementSpeed(amount);
         assertEquals(currentSpeed,volvo.getCurrentSpeed(),0.0);
     }
