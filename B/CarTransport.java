@@ -4,8 +4,7 @@ import java.util.*;
 public class CarTransport extends MotorVehicle implements Loadable {
     private boolean rampDown;
     private double lengthCapacityLeft;
-    private final double widthCapacity=2;
-    private ArrayList<MotorVehicle> cargo;
+    private ArrayList<Car> cargo;
     private final double weightFactor=0.1;
 
     /**
@@ -43,14 +42,14 @@ public class CarTransport extends MotorVehicle implements Loadable {
     /**
      * Method to load a vehicle onto the transport. Can only be done if the distance between the car transport and
      * the vehicle is less than 10 units adn if there is room on the trailer.
-     * @param m is of the typ MotorVehicle
+     * @param c is of the typ MotorVehicle
      */
-    public void load(MotorVehicle m) {
-        if (rampDown==true && distanceBetween(m)<=10 && capacityForVehicle(m)==true){
-            cargo.add(m);
-            lengthCapacityLeft-=m.getLength();
-            m.setPosition(this.getXPosition(),this.getYPosition());
-            m.stopEngine();
+    public void load(Car c) {
+        if (rampDown==true && distanceBetween(c)<=10 && capacityForVehicle(c)==true){
+            cargo.add(c);
+            lengthCapacityLeft-=c.getLength();
+            c.setPosition(this.getXPosition(),this.getYPosition());
+            c.stopEngine();
         }
     }
 
@@ -130,7 +129,7 @@ public class CarTransport extends MotorVehicle implements Loadable {
      * @return true if it fits, false if there is no room.
      */
     public boolean capacityForVehicle(MotorVehicle m){
-        return (lengthCapacityLeft>=m.getLength()&&widthCapacity>=m.getWidth());
+        return (lengthCapacityLeft>=m.getLength());
     }
 
     /**
@@ -153,5 +152,5 @@ public class CarTransport extends MotorVehicle implements Loadable {
             super.startEngine();
         }
     }
-    
+
 }
