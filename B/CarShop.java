@@ -37,7 +37,7 @@ public class CarShop <C extends Car>{
      * A method which removes the car which was first taken in.
      */
     public C unload(){
-        if(storage.isEmpty()!= true) {
+        if(!storage.isEmpty()) {
             C carTemp = storage.get(indexFirst);
             storage.remove(indexFirst);
             capacity+=1;
@@ -55,7 +55,15 @@ public class CarShop <C extends Car>{
      */
     private boolean isRoomForAnotherCar(C car){
     return capacity >=1;
+    }
 
+    /**
+     * Returns the cars that are stored in the car shop.
+     * @return cars stored in car shop.
+     */
+
+    public ArrayList<C> getStorage(){
+        return storage;
     }
 }
 
