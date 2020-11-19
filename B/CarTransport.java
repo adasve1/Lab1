@@ -103,7 +103,7 @@ public class CarTransport extends MotorVehicle implements Loadable {
      * Method to get the list of the cars on the transport.
      * @return cargo, which is an ArrayList.
      */
-    public ArrayList<MotorVehicle> getCargo(){
+    public ArrayList<Car> getCargo(){
         return cargo;
     }
 
@@ -125,11 +125,11 @@ public class CarTransport extends MotorVehicle implements Loadable {
 
     /**
      * A method which checks if there is capacity for another car, measured in metres.
-     * @param m is the MotorVehicle we want to check if it fits
+     * @param c is the MotorVehicle we want to check if it fits
      * @return true if it fits, false if there is no room.
      */
-    public boolean capacityForVehicle(MotorVehicle m){
-        return (lengthCapacityLeft>=m.getLength());
+    public boolean capacityForVehicle(Car c){
+        return (lengthCapacityLeft>=c.getLength());
     }
 
     /**
